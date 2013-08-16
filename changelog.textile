@@ -1,5 +1,9 @@
 h2. Change log
 
+h3. robotlegs-extensions-SignalStateMachine v0.5.0: 2013-08-16
+
+* Updated the extension for use with Robotlegs 2.0+ (tests have not yet been updated)
+
 h3. AS3-Signal-StateMachine-for-Robotlegs-V0-4-004: 17/20/2011
 
 * Allowed fallback command support in Cancelled Phase of transition

@@ -1,4 +1,4 @@
-package org.osflash.statemachine.core {
+package robotlegs.bender.extensions.signalStateMachine.api {
 	/**
 	 * Contract for wrapping and reflecting class references
 	 */
