@@ -213,27 +213,27 @@ package robotlegs.bender.extensions.signalStateMachine.decoding
 
             if (!entered.isNull)
             {
-                this.mapSignalCommand(signalState.name, Entered, entered);
+                this.mapSignalCommand(Entered, entered);
             }
 
             if (!enteringGuard.isNull)
             {
-                this.mapSignalCommand(signalState.name, EnteringGuard, enteringGuard);
+                this.mapSignalCommand(EnteringGuard, enteringGuard);
             }
 
             if (!exitingGuard.isNull)
             {
-                this.mapSignalCommand(signalState.name, ExitingGuard, exitingGuard);
+                this.mapSignalCommand(ExitingGuard, exitingGuard);
             }
 
             if (!tearDown.isNull)
             {
-                this.mapSignalCommand(signalState.name, TearDown, tearDown);
+                this.mapSignalCommand(TearDown, tearDown);
             }
 
             if (!cancelled.isNull)
             {
-                this.mapSignalCommand(signalState.name, Cancelled, cancelled);
+                this.mapSignalCommand(Cancelled, cancelled);
             }
 
             if (errors.length > 0)
@@ -261,7 +261,7 @@ package robotlegs.bender.extensions.signalStateMachine.decoding
             return this.injector.getInstance(signalClass, signalName);
         }
 
-        private function mapGuardedSignalCommand(stateName:String, signalClass:Class, item:PhaseDecoderItem):void
+        private function mapGuardedSignalCommand(signalClass:Class, item:PhaseDecoderItem):void
         {
             var guardClasses:Array = [];
             var commandClass:Class = getAndValidateClass(item.commandClassName);
@@ -280,10 +280,10 @@ package robotlegs.bender.extensions.signalStateMachine.decoding
                 return;
             }
 
-            this.signalCommandMap.map(signalClass, stateName).toCommand(commandClass).withGuards(guardClasses);
+            this.signalCommandMap.map(signalClass).toCommand(commandClass).withGuards(guardClasses);
         }
 
-        private function mapSignalCommand(stateName:String, signalClass:Class, phaseDecoder:PhaseDecoder):void
+        private function mapSignalCommand(signalClass:Class, phaseDecoder:PhaseDecoder):void
         {
             for each (var item:PhaseDecoderItem in phaseDecoder.decodedItems)
             {
@@ -296,12 +296,12 @@ package robotlegs.bender.extensions.signalStateMachine.decoding
                     var commandClass:Class = getAndValidateClass(item.commandClassName);
                     if (commandClass != null)
                     {
-                        this.signalCommandMap.map(signalClass, stateName).toCommand(commandClass);
+                        this.signalCommandMap.map(signalClass).toCommand(commandClass);
                     }
                 }
                 else
                 {
-                    mapGuardedSignalCommand(stateName, signalClass, item)
+                    mapGuardedSignalCommand(signalClass, item)
                 }
 
             }
